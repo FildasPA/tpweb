@@ -38,17 +38,19 @@
 			function modify_user($conn,$user) {
 				echo "<br/>";
 				echo "<br/>";
-				echo "<h4>Profil de " . $user['prenom'] . " " . $user["nom"] . ":</h4>";
+				echo "<h4>Profil de " . $user['login'] . ":</h4>";
 				echo "<br/>";
 				echo "<table>";
 				echo "<tr>";
 				echo "<th>Id</th>";
+				echo "<th>Login</th>";
 				echo "<th>Nom</th>";
 				echo "<th>Prénom</th>";
 				echo "<th>Adresse avatar</th>";
 				echo "</tr>";
 				echo "<tr>";
 				echo "<td>" . $user['id']     . "</td>";
+				echo "<td>" . $user['login'] . "</td>";
 				echo "<td> ". $user['nom'] . "</td>";
 				echo "<td>" . $user['prenom'] . "</td>";
 				echo "<td style=\"width:200px\">" . $user['avatar'] . "</td>";

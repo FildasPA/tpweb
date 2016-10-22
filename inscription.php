@@ -72,7 +72,7 @@
 	function insert_user($conn,$user)
 	{
 		if(user_already_exists($conn,$user)) {
-			echo "<p style='color:red;'>Un autre utilisateur avec le même nom et le même prénom existe déjà!</p>";
+			echo "<p style='color:red;'>Un autre utilisateur avec le même pseudo existe déjà!</p>";
 			return false;
 		}
 		$insert = query($conn,"INSERT INTO personnes (nom,prenom,avatar,login,password)
@@ -103,6 +103,7 @@
 			echo "<p style='color:green;'>Utilisateur enregistré!</p>";
 			echo "<p>Redirection vers l'<a href='index.php'>index</a>...</p>";
 			header('refresh:5;url=index.php');
+			$conn = "";
 			exit();
 		}
 		$conn = "";
@@ -112,15 +113,25 @@
 	// * MAIN
 	// Récupère les informations transmises via le formulaire
 	//------------------------------------------------------------------------------
-	$avatar_url = $_FILES['avatar']['tmp_name'];
+	// Informations générales
 	$user = array('nom'      => test_input($_REQUEST['nom']),
 	              'prenom'   => test_input($_REQUEST['prenom']),
 	              'login'    => test_input($_REQUEST['login']),
-	              'password' => test_input($_REQUEST['password']),
-	              'avatar'   => 'avatar_' . test_input($_REQUEST['login']));
+	              'password' => test_input($_REQUEST['password']));
 
+	// URL de l'image (serveur & upload)
+	$avatar_url = $_FILES['avatar']['tmp_name'];
+	$avatar_name = $_FILES['avatar']['name'];
+	$image_type = substr($avatar_name,strpos($avatar_name,"."));
+	$user['avatar'] = 'avatar_' . test_input($_REQUEST['login']) . $image_type;
+
+	// Création de l'utilisateur
 	create_user($user,$avatar_url);
 
+	unset($user['password']);
+	unset($avatar_name);
+	unset($image_type);
+	unset($avatar_url);
 
 
 	?>
