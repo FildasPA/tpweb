@@ -1,0 +1,110 @@
+
+/*******/
+/* CSS */
+/*******/
+
+/********/
+/* Main */
+/********/
+
+body {
+	background-color: #D8D8D8;
+	font-family: 'sans-serif', 'Helvetica', 'Arial';
+}
+
+h1,h2,h3,h4 {
+	color: #3378B9;
+}
+
+table {
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+th,td {
+	vertical-align: top;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 4px 10px;
+	border-bottom: 1px solid #bbb;
+}
+
+tr.user {
+	cursor: pointer;
+	transition: background-color 0.7s;
+	-webkit-transition: background-color 0.7s;
+}
+
+tr.user:hover {
+	background-color: #fff;
+}
+
+/********/
+/* Form */
+/********/
+
+#form-inscription {
+	width: 310px;
+	margin: 0px auto;
+}
+
+#form-inscription > div {
+	margin: 0 0 10px 0;
+}
+
+/********************/
+/* Inscription form */
+/********************/
+
+#form-inscription label {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+#form-inscription #inscription-label {
+	font-size: 1.3em;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	text-align: center;
+	padding-left: 5px;
+	color: #3378B9;
+}
+
+#form-inscription input#password, #form-inscription input#login {
+	display: block;
+	width: calc(100% - 18px);
+}
+
+#form-inscription div#submit-element {
+	text-align: center;
+}
+
+#form-inscription input#submit-button {
+	margin-top: 15px;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+}
+
+#form-inscription input#name, #form-inscription input#firstname {
+	display: inline-block;
+}
+
+#form-inscription input#firstname {
+	width: 150px;
+	margin-right: 0;
+}
+
+#form-inscription input#name {
+	width: 120px;
+}
+
+#form-inscription .error-message {
+	display: none;
+	margin-bottom: 5px;
+	color: red;
+}
