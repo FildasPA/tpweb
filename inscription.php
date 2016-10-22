@@ -149,18 +149,18 @@
 		<label id="inscription-label">Inscription</label>
 		<div id="login-form-element">
 			<label>Pseudo</label>
-			<input id="login" name="login" type="text/html" placeholder="Pseudo" value="<?php echo $user['login']; ?>">
+			<input id="login" name="login" type="text/html" placeholder="Pseudo" onblur="checkLogin()" value="<?php echo $user['login']; ?>">
 			<div id="error-login" class="error-message"></div>
 		</div>
 		<div id="password-form-element">
 			<label>Mot de passe</label>
-			<input id="password" name="password" type="password" placeholder="Mot de passe">
+			<input id="password" name="password" type="password" placeholder="Mot de passe" onblur="checkPassword()">
 			<div id="error-password" class="error-message"></div>
 		</div>
 		<div id="name-form-element">
 			<label>Identité</label>
-			<input id="firstname" name="prenom" type="text/html" placeholder="Prénom" value="<?php echo $user['prenom']; ?>">
-			<input id="name" name="nom" type="text/html" placeholder="Nom" value="<?php echo $user['nom']; ?>">
+			<input id="firstname" name="prenom" type="text/html" placeholder="Prénom" onblur="checkFirstname()" value="<?php echo $user['prenom']; ?>">
+			<input id="name" name="nom" type="text/html" placeholder="Nom" onblur="checkName()" value="<?php echo $user['nom']; ?>">
 			<div id="error-firstname" class="error-message"></div>
 			<div id="error-name" class="error-message"></div>
 		</div>
