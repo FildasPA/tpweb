@@ -121,24 +121,34 @@
 	// Récupère les informations transmises via le formulaire
 	//------------------------------------------------------------------------------
 	// Informations générales
-	$user = array('name'      => test_input($_REQUEST['name']),
-	              'firstname' => test_input($_REQUEST['firstname']),
-	              'login'     => test_input($_REQUEST['login']),
-	              'password'  => test_input($_REQUEST['password']));
+	$user = array('name'=>'','firstname'=>'','login'=>'','password'=>'');
 
-	// URL de l'image (serveur & upload)
-	$avatar_url = $_FILES['avatar']['tmp_name'];
-	$avatar_name = $_FILES['avatar']['name'];
-	$image_type = substr($avatar_name,strpos($avatar_name,"."));
-	$user['avatar'] = 'avatar_' . test_input($_REQUEST['login']) . $image_type;
+	$is_info_set = (isset($_REQUEST['name']) &&
+	                isset($_REQUEST['firstname']) &&
+	                isset($_REQUEST['login']) &&
+	                isset($_REQUEST['password']) &&
+	                isset($_FILES['avatar']));
 
-	// Création de l'utilisateur
-	create_user($user,$avatar_url);
+	if($is_info_set) {
+		$user = array('name'      => test_input($_REQUEST['name']),
+		              'firstname' => test_input($_REQUEST['firstname']),
+		              'login'     => test_input($_REQUEST['login']),
+		              'password'  => test_input($_REQUEST['password']));
 
-	unset($user['password']);
-	unset($avatar_name);
-	unset($image_type);
-	unset($avatar_url);
+		// URL de l'image (serveur & upload)
+		$avatar_url = $_FILES['avatar']['tmp_name'];
+		$avatar_name = $_FILES['avatar']['name'];
+		$image_type = substr($avatar_name,strpos($avatar_name,"."));
+		$user['avatar'] = 'avatar_' . test_input($_REQUEST['login']) . $image_type;
+
+		// Création de l'utilisateur
+		create_user($user,$avatar_url);
+
+		unset($user['password']);
+		unset($avatar_name);
+		unset($image_type);
+		unset($avatar_url);
+	}
 
 
 	?>

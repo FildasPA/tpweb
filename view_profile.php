@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-	<title>Modifier utilisateur</title>
+	<title>Voir un profil utilisateur</title>
 	<meta charset="utf-8" />
 	<meta name="author" content="Delvaux Julien, id:1500182, Boge Julien, id:1502198"/>
 	<meta name="description" content="Voir un profil utilisateur" />
