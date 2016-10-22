@@ -43,13 +43,20 @@
 	}
 
 	//------------------------------------------------------------------------------
-	// * Vérifie si les informations sont vides
+	// * Vérifie si les informations sont correctes
 	//------------------------------------------------------------------------------
 	function check_user_info($user,$avatar_url)
 	{
-		return !(empty($user['login']) || empty($user['password']) ||
-		       empty($user['nom']) || empty($user['prenom']) ||
-		       empty($user['avatar']) || empty($avatar_url));
+		return !(empty($user['login'])    ||
+		         empty($user['password']) ||
+		         empty($user['nom'])      ||
+		         empty($user['prenom'])   ||
+		         empty($user['avatar'])   ||
+		         empty($avatar_url)       ||
+		         strlen($user['login'])    > 15 ||
+		         strlen($user['password']) > 32 ||
+		         strlen($user['nom'])      > 15 ||
+		         strlen($user['prenom'])   > 15);
 	}
 
 	//------------------------------------------------------------------------------
