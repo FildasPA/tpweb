@@ -33,14 +33,14 @@ function checkStringLength(element,maxLength,errorMessage) {
 //------------------------------------------------------------------------------
 function checkForm() {
 	return (checkEmptyField("login","Veuillez indiquer un pseudo d'utilisateur") &&
-	        checkStringLength("login",15,"Le pseudo doit faire moins de 15 caractères") &&
 	        checkEmptyField("password","Veuillez saisir un mot de passe") &&
-	        checkStringLength("password",32,"Le mot de passe doit faire moins de 32 caractères") &&
 	        checkEmptyField("firstname","Veuillez indiquer votre prénom") &&
-	        checkStringLength("firstname",15,"Le prénom doit faire moins de 15 caractères") &&
 	        checkEmptyField("name","Veuillez indiquer votre nom") &&
-	        checkStringLength("name",15,"Le nom doit faire moins de 15 caractères") &&
-	        checkEmptyField("avatar","Veuillez sélectionner une image"));
+	        checkEmptyField("avatar","Veuillez sélectionner une image") &&
+	        checkStringLength("login",15,"Le pseudo doit faire moins de 15 caractères") &&
+	        checkStringLength("password",32,"Le mot de passe doit faire moins de 32 caractères") &&
+	        checkStringLength("firstname",15,"Le prénom doit faire moins de 15 caractères") &&
+	        checkStringLength("name",15,"Le nom doit faire moins de 15 caractères"));
 }
 
 //------------------------------------------------------------------------------

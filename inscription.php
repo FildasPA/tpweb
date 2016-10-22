@@ -47,16 +47,16 @@
 	//------------------------------------------------------------------------------
 	function check_user_info($user,$avatar_url)
 	{
-		return !(empty($user['login'])    ||
+		return !(empty($user['login']) ||
 		         empty($user['password']) ||
-		         empty($user['nom'])      ||
-		         empty($user['prenom'])   ||
-		         empty($user['avatar'])   ||
-		         empty($avatar_url)       ||
-		         strlen($user['login'])    > 15 ||
+		         empty($user['name']) ||
+		         empty($user['firstname']) ||
+		         empty($user['avatar']) ||
+		         empty($avatar_url) ||
+		         strlen($user['login']) > 15 ||
 		         strlen($user['password']) > 32 ||
-		         strlen($user['nom'])      > 15 ||
-		         strlen($user['prenom'])   > 15);
+		         strlen($user['name']) > 15 ||
+		         strlen($user['firstname']) > 15);
 	}
 
 	//------------------------------------------------------------------------------
@@ -83,7 +83,7 @@
 			return false;
 		}
 		$insert = query($conn,"INSERT INTO personnes (nom,prenom,avatar,login,password)
-		                VALUES ('$user[nom]','$user[prenom]','$user[avatar]','$user[login]','$user[password]')");
+		                VALUES ('$user[name]','$user[firstname]','$user[avatar]','$user[login]','$user[password]')");
 		if(!$insert) {
 			echo "<p style='color:red;'>Erreur: l'utilisateur n'a pas pu être ajouté!</p>";
 			return false;
@@ -121,10 +121,10 @@
 	// Récupère les informations transmises via le formulaire
 	//------------------------------------------------------------------------------
 	// Informations générales
-	$user = array('nom'      => test_input($_REQUEST['nom']),
-	              'prenom'   => test_input($_REQUEST['prenom']),
-	              'login'    => test_input($_REQUEST['login']),
-	              'password' => test_input($_REQUEST['password']));
+	$user = array('name'      => test_input($_REQUEST['name']),
+	              'firstname' => test_input($_REQUEST['firstname']),
+	              'login'     => test_input($_REQUEST['login']),
+	              'password'  => test_input($_REQUEST['password']));
 
 	// URL de l'image (serveur & upload)
 	$avatar_url = $_FILES['avatar']['tmp_name'];
@@ -159,8 +159,8 @@
 		</div>
 		<div id="name-form-element">
 			<label>Identité</label>
-			<input id="firstname" name="prenom" type="text/html" placeholder="Prénom" onblur="checkFirstname()" value="<?php echo $user['prenom']; ?>">
-			<input id="name" name="nom" type="text/html" placeholder="Nom" onblur="checkName()" value="<?php echo $user['nom']; ?>">
+			<input id="firstname" name="firstname" type="text/html" placeholder="Prénom" onblur="checkFirstname()" value="<?php echo $user['firstname']; ?>">
+			<input id="name" name="name" type="text/html" placeholder="Nom" onblur="checkName()" value="<?php echo $user['name']; ?>">
 			<div id="error-firstname" class="error-message"></div>
 			<div id="error-name" class="error-message"></div>
 		</div>
