@@ -40,24 +40,20 @@ tr.user:hover {
 	background-color: #fff;
 }
 
+/******************/
+/* Main-container */
+/******************/
+
+#main-container {
+	/*width: 310px;*/
+	margin: 40px 150px 0;
+}
+
 /********/
 /* Form */
 /********/
 
-#form-inscription {
-	width: 310px;
-	margin: 0px auto;
-}
-
-#form-inscription > div {
-	margin: 0 0 10px 0;
-}
-
-/********************/
-/* Inscription form */
-/********************/
-
-#form-inscription label {
+form label {
 	display: block;
 	margin-bottom: 5px;
 	font-size: 0.9em;
@@ -65,7 +61,7 @@ tr.user:hover {
 	padding-left: 10px;
 }
 
-#form-inscription #inscription-label {
+form #main-label {
 	font-size: 1.3em;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -74,20 +70,38 @@ tr.user:hover {
 	color: #3378B9;
 }
 
-#form-inscription input#password, #form-inscription input#login {
-	display: block;
+form > div {
+	margin: 0 0 10px 0;
+}
+
+form input:not(#submit-button) {
 	width: calc(100% - 18px);
 }
 
-#form-inscription div#submit-element {
+form div#submit-element {
 	text-align: center;
 }
 
-#form-inscription input#submit-button {
+form input#submit-button {
 	margin-top: 15px;
 	font-weight: bold;
 	cursor: pointer;
 	text-align: center;
+}
+
+form .error-message {
+	display: none;
+	margin: 5px 0;
+	color: red;
+}
+
+/********************/
+/* Inscription form */
+/********************/
+
+#form-inscription {
+	width: 310px;
+	margin: 60px auto 0px;
 }
 
 #form-inscription input#name, #form-inscription input#firstname {
@@ -103,8 +117,11 @@ tr.user:hover {
 	width: 120px;
 }
 
-#form-inscription .error-message {
-	display: none;
-	margin-bottom: 5px;
-	color: red;
+/*********/
+/* Login */
+/*********/
+
+#form-login {
+	width: 310px;
+	margin: 60px auto 0px;
 }
