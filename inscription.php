@@ -11,9 +11,8 @@
 
 	<?php include("php/register.php"); ?>
 
-	<br><br>
 	<form id="form-inscription" name="inscription" method="POST" action="inscription.php" enctype="multipart/form-data">
-		<label id="inscription-label">Inscription</label>
+		<label id="main-label">Inscription</label>
 		<div id="login-form-element">
 			<label>Pseudo</label>
 			<input id="login" name="login" type="text/html" placeholder="Pseudo" onblur="checkLogin()" value="<?php echo $user['login']; ?>">
@@ -42,7 +41,7 @@
 		</div>
 	</form>
 
-	<?php include("includes/bottom.php");	?>
+	<?php include("includes/footer.php");	?>
 
   <script type="text/javascript" src="js/checkInscriptionForm.js"></script>
 

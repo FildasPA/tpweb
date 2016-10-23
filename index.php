@@ -26,7 +26,7 @@
 			</form>
 
 			<?php include("php/display_users_list.php"); ?>
-			<?php include("includes/bottom.php");	?>
+			<?php include("includes/footer.php");	?>
 		</div>
 
 

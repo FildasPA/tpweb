@@ -49,6 +49,11 @@ tr.user:hover {
 	margin: 40px 150px 0;
 }
 
+#footer {
+	margin: 100px auto 30px;
+	text-align: center;
+}
+
 /********/
 /* Form */
 /********/
