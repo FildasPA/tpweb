@@ -6,9 +6,8 @@
 	<meta name="author" content="Delvaux Julien, id:1500182, Boge Julien, id:1502198"/>
 	<meta name="description" content="Inscription utilisateur" />
   <link rel="stylesheet" href="css/main.css">
-  <script type="text/javascript" src="js/checkInscriptionForm.js"></script>
 </head>
-<body>
+<body onload="checkFormOnLoad()">
 
 	<?php include("php/register.php"); ?>
 
@@ -44,6 +43,8 @@
 	</form>
 
 	<?php include("includes/bottom.php");	?>
+
+  <script type="text/javascript" src="js/checkInscriptionForm.js"></script>
 
 </body>
 </html>
