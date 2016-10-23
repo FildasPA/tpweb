@@ -4,7 +4,7 @@
 /*******/
 
 /********/
-/* Main */
+/* Base */
 /********/
 
 body {
@@ -40,12 +40,11 @@ tr.user:hover {
 	background-color: #fff;
 }
 
-/******************/
-/* Main-container */
-/******************/
+/********/
+/* Main */
+/********/
 
 #main-container {
-	/*width: 310px;*/
 	margin: 40px 150px 0;
 }
 
@@ -122,11 +121,51 @@ form .error-message {
 	width: 120px;
 }
 
-/*********/
-/* Login */
-/*********/
+/**************/
+/* Login form */
+/**************/
 
 #form-login {
 	width: 310px;
 	margin: 60px auto 0px;
+}
+
+/****************/
+/* User profile */
+/****************/
+
+#user-profile {
+	border: 1px solid #c0c0c0;
+	background-color: #FFF;
+}
+
+#user-profile h3 {
+	margin: 0;
+	padding: 9px;
+	font-size: 16px;
+	border-bottom: 1px solid #c0c0c0;
+	background-color: #e5e5e5;
+}
+
+#user-profile #user-info-block {
+	padding: 9px;
+}
+
+#user-profile .info-element {
+	margin-bottom: 20px;
+}
+
+#user-profile .info-label {
+	font-weight: bold;
+	margin-bottom: 7px;
+}
+
+#user-profile .info-element div:not(.info-label) {
+	margin-left: 10px;
+}
+
+#user-profile img#user-avatar-image {
+	max-width: 150px;
+	max-height: 150px;
+	margin-left: 10px;
 }
