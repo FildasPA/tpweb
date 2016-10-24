@@ -6,6 +6,7 @@
 // -- Objet : Traitement des données du formulaire d'inscription
 // -- Par : Julien Delvaux & Julien Boge
 // -- Dernière modification : 23.10.16
+//
 //==============================================================================
 
 
@@ -61,9 +62,10 @@ function copy_avatar($url,$dest_file)
 function user_login_used($conn,$login)
 {
 	try {
-		$user_exists = $conn->prepare("SELECT login
-	                                 FROM personnes
-	                                 WHERE login = :login");
+		$sql = "SELECT login
+		        FROM personnes
+		        WHERE login = :login";
+		$user_exists = $conn->prepare($sql);
 		$user_exists->bindParam(':login',$user['login'],PDO::PARAM_STR,15);
 		$user_exists->execute();
 		if(!$user_exists || $user_exists->rowCount() > 0) {
@@ -84,8 +86,9 @@ function user_login_used($conn,$login)
 function insert_user($conn,$user)
 {
 	try { // Insère l'utilisateur
-		$insert = $conn->prepare("INSERT INTO personnes (nom,prenom,avatar,login,password)
-	                            VALUES (:name,:firstname,:avatar,:login,:password)");
+		$sql = "INSERT INTO personnes (nom,prenom,avatar,login,password)
+		        VALUES (:name,:firstname,:avatar,:login,:password)";
+		$insert = $conn->prepare($sql);
 		$insert->bindParam(':name',      $user['name'],      PDO::PARAM_STR,15);
 		$insert->bindParam(':firstname', $user['firstname'], PDO::PARAM_STR,15);
 		$insert->bindParam(':avatar',    $user['avatar'],    PDO::PARAM_STR,30);
@@ -111,7 +114,7 @@ function register($user,$avatar_url)
 	if(!check_user_info($user,$avatar_url)) return false;
 
 	// Connexion bdd
-	include_once("php/connect_db.php");
+	include_once("connect_db.php");
 	$conn = connect_db();
 	if(!$conn) {
 		echo "<p style='color:red;'>Impossible de se connecter à la bdd</p>";

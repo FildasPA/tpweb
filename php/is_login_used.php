@@ -17,8 +17,8 @@ if(!$conn) {
 }
 try {
 	$stmt = $conn->prepare("SELECT login
-                         FROM personnes
-                         WHERE login = :login");
+	                        FROM personnes
+	                        WHERE login = :login");
 	$stmt->bindParam(':login',$login,PDO::PARAM_STR,15);
 	$stmt->execute();
 	if($stmt->rowCount() > 0) {

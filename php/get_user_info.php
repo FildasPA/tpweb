@@ -9,13 +9,10 @@
 //
 //==============================================================================
 
-//------------------------------------------------------------------------------
-// * Retourne l'utilisateur correspondant à l'id envoyée en paramètre
-//------------------------------------------------------------------------------
 function get_user_info($id) {
 
 	// Connexion bdd
-	include_once("php/connect_db.php");
+	include_once("connect_db.php");
 	$conn = connect_db();
 	if(!$conn) {
 		echo "<p style='color:red;'>Impossible de se connecter à la bdd</p>";

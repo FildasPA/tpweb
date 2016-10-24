@@ -9,13 +9,10 @@
 //
 //==============================================================================
 
-//------------------------------------------------------------------------------
-// * Afficher la liste des utilisateurs
-//------------------------------------------------------------------------------
 function display_users()
 {
 	// Connexion bdd
-	include_once("php/connect_db.php");
+	include_once("connect_db.php");
 	$conn = connect_db();
 	if(!$conn) {
 		echo "<p style='color:red;'>Impossible de se connecter à la bdd</p>";
