@@ -32,19 +32,22 @@ function display_users()
 		}
 
 		// Afficher la liste des utilisateurs
-		echo "<h4>Liste des utilisateurs inscrits:</h4>";
 		if($users->rowCount() <= 0) {
 			echo "<p>Aucun utilisateur enregistré</p>";
 			return;
 		}
-		echo "<table>";
-		echo "<tr>";
+		echo "<table><tr>";
 		// echo "<th>Nom</th>";
 		// echo "<th>Prénom</th>";
 		echo "<th>Pseudo</th>";
 		echo "</tr>";
 		while($user = $users->fetch(PDO::FETCH_ASSOC)) {
-			echo "<tr class='user' title=\"Voir le profil\" onclick=\"window.document.location='view_profile.php?id=" . $user['id'] . "	';\">";
+			echo "<tr class='user' title=\"Voir le profil\" onclick=\"window.document.location='";
+			// Lien vers la page view profile ou modify profile
+			if(false) echo "private/modify_profile.php";
+			else echo "view_profile.php";
+
+			echo "?id=" . $user['id'] . "';\">";
 			echo "<td>" . $user['login']    . "</td>";
 			// echo "<td>" . $user['nom']    . "</td>";
 			// echo "<td>" . $user['prenom'] . "</td>";
