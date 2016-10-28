@@ -2,14 +2,14 @@
 
 //==============================================================================
 //
-// ■ Get user profile
+// ■ Get user informations
 // -- Objet : Renvoie les informations de l'utilisateur correspondant à l'id envoyée
 // -- Par : Julien Delvaux & Julien Boge
 // -- Dernière modification : 23.10.16
 //
 //==============================================================================
 
-function get_user_info($id) {
+function get_user_infos($id) {
 
 	// Connexion bdd
 	include_once("connect_db.php");
@@ -22,7 +22,8 @@ function get_user_info($id) {
 	try {
 		$sql = "SELECT nom,prenom,avatar,login
 		        FROM personnes
-		        WHERE id = :id";
+		        WHERE id = :id
+		        LIMIT 1";
 		$user = $conn->prepare($sql);
 		$user->bindParam(':id',$id,PDO::PARAM_INT);
 		$user->execute();

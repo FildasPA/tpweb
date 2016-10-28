@@ -13,9 +13,9 @@
 
 		<?php
 
-		include("php/get_user_info.php");
+		include("php/get_user_infos.php");
 		$id   = (int) $_REQUEST['id'];
-		$user = get_user_info($id);
+		$user = get_user_infos($id);
 		if(!$user) { // Si l'utilisateur n'existe pas, affiche l'erreur et le footer
 			echo "<p>L'id $id ne correspond à aucun utilisateur.</p>";
 			include("includes/footer.php");
