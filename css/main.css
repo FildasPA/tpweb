@@ -65,7 +65,7 @@ form label {
 	padding-left: 10px;
 }
 
-form #main-label {
+form h3 {
 	font-size: 1.3em;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -106,6 +106,8 @@ form .error-message {
 #form-inscription {
 	width: 310px;
 	margin: 60px auto 0px;
+	/*background-color: #FFF;*/
+	/*text-align: center;*/
 }
 
 #form-inscription input#name, #form-inscription input#firstname {
@@ -126,7 +128,7 @@ form .error-message {
 /**************/
 
 #form-login {
-	width: 310px;
+	width: 350px;
 	margin: 60px auto 0px;
 }
 
@@ -168,4 +170,12 @@ form .error-message {
 	max-width: 150px;
 	max-height: 150px;
 	margin-left: 10px;
+}
+
+/*********************/
+/* User profile form */
+/*********************/
+
+#form-modify-profile input {
+	width: auto !important;
 }

@@ -12,7 +12,7 @@
 	<?php include("php/register.php"); ?>
 
 	<form id="form-inscription" name="inscription" method="POST" action="inscription.php" enctype="multipart/form-data">
-		<label id="main-label">Inscription</label>
+		<h3>Inscription</h3>
 		<div id="login-form-element">
 			<label>Pseudo</label>
 			<input id="login" name="login" type="text/html" placeholder="Pseudo" onblur="checkLogin()" value="<?php echo $user['login']; ?>">

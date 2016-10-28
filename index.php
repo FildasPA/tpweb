@@ -11,7 +11,7 @@
 
 		<div id="main-container">
 			<form id="form-login" name="login" method="POST" action="connexion.php" enctype="multipart/form-data">
-				<label id="main-label">Se connecter</label>
+				<h3>Se connecter</h3>
 				<div id="login-form-element">
 					<label>Pseudo</label>
 					<input name="login" type="text" placeholder="Pseudo">
