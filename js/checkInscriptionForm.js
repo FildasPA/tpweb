@@ -2,6 +2,7 @@
 //------------------------------------------------------------------------------
 // * Vérifie si le champ spécifié est rempli
 // Si non, insère le message d'erreur correspondant
+// Si oui, cache le champ de message d'erreur
 //------------------------------------------------------------------------------
 function checkEmptyField(element,errorMessage) {
 	var content = document.getElementById(element).value;
@@ -18,6 +19,7 @@ function checkEmptyField(element,errorMessage) {
 //------------------------------------------------------------------------------
 // * Vérifie la longueur de la chaîne de caractères du champ spécifié
 // Si non, insère le message d'erreur correspondant
+// Si oui, cache le champ de message d'erreur
 //------------------------------------------------------------------------------
 function checkStringLength(element,maxLength,errorMessage) {
 	var content = document.getElementById(element).value;

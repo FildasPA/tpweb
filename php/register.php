@@ -3,7 +3,7 @@
 //==============================================================================
 //
 // ■ Register
-// -- Objet : Traitement des données du formulaire d'inscription
+// -- Objet : Traitement du formulaire d'inscription
 // -- Par : Julien Delvaux & Julien Boge
 // -- Dernière modification : 23.10.16
 //
@@ -18,9 +18,9 @@
 //------------------------------------------------------------------------------
 function test_input($data)
 {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
+  $data = trim($data);             // Supprime les espaces de début et de fin
+  $data = stripslashes($data);     // Supprime les antislashs (\)
+  $data = htmlspecialchars($data); // Convertit les charactères spéciaux en HTML
   return $data;
 }
 
@@ -62,7 +62,7 @@ function copy_avatar($url,$dest_file)
 function user_login_used($conn,$login)
 {
 	try {
-		$sql = "SELECT login
+		$sql = "SELECT id
 		        FROM personnes
 		        WHERE login = :login";
 		$user_exists = $conn->prepare($sql);
