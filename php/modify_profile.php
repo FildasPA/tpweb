@@ -5,13 +5,16 @@
 // ■ Modify profile
 // -- Objet : Traitement des modifications du profil utilisateur
 // -- Par : Julien Delvaux & Julien Boge
-// -- Dernière modification : 28.10.16
+// -- Dernière modification : 29.10.16
 //
 //==============================================================================
 //
-// ■ Liste des erreurs possibles
-//  -
-//  -
+// ■ Liste des erreurs possibles :
+// - Champs vides ou trop longs
+// - Ancien mot de passe incorrect
+// - Champ ancien mdp rempli et nouveau mdp vide, ou inversement
+// - Pas de session ouverte
+// - Nouveau login déjà pris par un autre utilisateur
 //
 //==============================================================================
 include("display_globals.php"); // affiche le contenu des variables globales
@@ -20,13 +23,13 @@ include("display_globals.php"); // affiche le contenu des variables globales
 // Test input (pris sur w3schools)
 // http://www.w3schools.com/php/showphp.asp?filename=demo_form_validation_escapechar
 //------------------------------------------------------------------------------
-function test_input($data)
-{
-  $data = trim($data);             // Supprime les espaces de début et de fin
-  $data = stripslashes($data);     // Supprime les antislashs (\)
-  $data = htmlspecialchars($data); // Convertit les charactères spéciaux en HTML
-  return $data;
-}
+// function test_input($data)
+// {
+//   $data = trim($data);             // Supprime les espaces de début et de fin
+//   $data = stripslashes($data);     // Supprime les antislashs (\)
+//   $data = htmlspecialchars($data); // Convertit les charactères spéciaux en HTML
+//   return $data;
+// }
 
 //------------------------------------------------------------------------------
 // * Copie l'avatar sur le serveur
@@ -108,8 +111,6 @@ if(empty($new_user['name']) ||
 	exit;
 }
 
-
-
 //------------------------------------------------------------------------------
 // Connexion à la bdd
 include_once("connect_db.php");
@@ -121,8 +122,12 @@ if(!$conn) {
 
 //------------------------------------------------------------------------------
 // Récolte des anciennes informations de l'utilisateur
-// TODO: sécurité: vérifier que l'id dans la session / le cookie correspond au profil voulant être modifié
-$id = (int) test_input($_REQUEST['id']);
+if(!isset($_SESSION['id'])) {
+	echo "<p style='color:red;'>Erreur: un invité ne peut modifier un profil utilisateur!</p>";
+	exit;
+}
+$id = (int) $_SESSION['id'];
+// $id = (int) test_input($_REQUEST['id']);
 try {
 	$sql = "SELECT nom,prenom,avatar,login,password
 	        FROM personnes
@@ -167,6 +172,8 @@ if($old_user['login'] != $new_user['login']) {
 		$dest_dir  = dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . "/pictures/";
 		echo "<p>Renommage de l'avatar... (" . $old_user['avatar'] . "," . $new_user['avatar'] . ") </p>";
 		rename($dest_dir . $old_user['avatar'],$dest_dir . $new_user['avatar']);
+	} else {
+
 	}
 } else {
 	if(!empty($_FILES['avatar']['tmp_name'])) {
@@ -182,22 +189,22 @@ if(empty($old_password) && empty($new_password)) {
 
 //------------------------------------------------------------------------------
 // * Avatar
-// L'image doit être modifiée si:
+// L'image et le champ avatar doivent être modifiés si:
 // - le login change
 // - une autre image a été envoyée
-// Le champ avatar doit être modifié si:
-// - le login change
 //------------------------------------------------------------------------------
 // Copie du nouvel avatar
 // Suppression de l'ancienne image si le login a changé
 if(!empty($_FILES['avatar']['tmp_name'])) {
+	echo "<p>Nouvel avatar</p>";
+	$dest_dir  = dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . "/pictures/";
 	$avatar_url  = $_FILES['avatar']['tmp_name'];
 	$avatar_name = $_FILES['avatar']['name'];
 	$image_type  = substr($avatar_name,strrpos($avatar_name,"."));
 	$new_user['avatar'] = 'avatar_' . $new_user['login'] . $image_type;
 	if($old_user['login'] != $new_user['login']) unlink($dest_dir . $old_user['avatar']);
-	echo "<p>Changement de l'avatar: copie de l'image... (" . $avatar_url . "," . $new_user['avatar'] . ")</p>";
-	copy_avatar($avatar_url,$new_user['avatar']);
+	echo "<p>Changement de l'avatar: copie de l'image... (" . $avatar_url . "," . $dest_dir . $new_user['avatar'] . ")</p>";
+	copy_avatar($avatar_url,"../pictures/" . $new_user['avatar']);
 }
 
 //------------------------------------------------------------------------------
