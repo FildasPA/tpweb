@@ -45,11 +45,11 @@ tr.user:hover {
 /********/
 
 #main-container {
-	margin: 40px 150px 0;
+	margin: 20px 150px 0;
 }
 
 #footer {
-	margin: 100px auto 30px;
+	margin: 50px auto 30px;
 	text-align: center;
 }
 
@@ -105,7 +105,7 @@ form .error-message {
 
 #form-inscription {
 	width: 310px;
-	margin: 60px auto 0px;
+	margin: 25px auto 0px;
 	/*background-color: #FFF;*/
 	/*text-align: center;*/
 }
