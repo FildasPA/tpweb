@@ -19,8 +19,9 @@ include("../php/verif_login.php");
 			<p>Bonjour <?php echo $_SESSION['firstname'] . " " . $_SESSION['name']; ?>!</p>
 			<h4>Liste des utilisateurs inscrits</h4>
 			<?php	include("../php/display_users_list.php");	?>
-			<?php include("../includes/footer.php");
-			?>
+			<div id="footer">
+				<a href="index.php">Index</a>
+			</div>
 		</div>
 
 	</body>

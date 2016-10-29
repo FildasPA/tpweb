@@ -1,3 +1,5 @@
+<?php include("php/verif_login.php"); ?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -13,10 +15,13 @@
 
 		<?php
 
+		// Obtenir les informations utilisateur
 		include("php/get_user_infos.php");
 		$id   = (int) $_REQUEST['id'];
 		$user = get_user_infos($id);
-		if(!$user) { // Si l'utilisateur n'existe pas, affiche l'erreur et le footer
+
+		// Si aucune info (utilisateur inexistant?) affiche l'erreur et le footer
+		if($user === false) {
 			echo "<p>L'id $id ne correspond à aucun utilisateur.</p>";
 			include("includes/footer.php");
 			exit;
@@ -42,7 +47,16 @@
 			</div>
 		</div>
 
-		<?php include("includes/footer.php");	?>
+		<?php
+		// Affichage du footer correct (retour à l'index publique ou privé)
+		if(isset($_SESSION) && $_SESSION['id']) {
+			echo "<div id=\"footer\">";
+			echo "<a href=\"private/index.php\">Index</a>";
+			echo "</div>";
+		} else {
+			include("includes/footer.php");
+		}
+		?>
 
 		</div>
 	</body>
