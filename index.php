@@ -10,7 +10,7 @@
 	<body>
 
 		<div id="main-container">
-			<form id="form-login" name="login" method="POST" action="connexion.php" enctype="multipart/form-data">
+			<form id="form-login" name="login" method="POST" action="private/index.php" enctype="multipart/form-data">
 				<h3>Se connecter</h3>
 				<div id="login-form-element">
 					<label>Pseudo</label>
@@ -20,6 +20,10 @@
 					<label>Mot de passe</label>
 					<input name="password" type="password" placeholder="Password">
 				</div>
+				<div id="">
+				<input type="checkbox" name="remember-me" style="width:auto !important;display:inline-block;">
+					<label style="width:auto !important;display:inline-block;">Rester connecté</label>
+				</div>
 				<div id="submit-element">
 					<input id="submit-button" class="button" type="submit" name="valider" value="Connexion">
 				</div>
@@ -28,7 +32,6 @@
 			<?php include("php/display_users_list.php"); ?>
 			<?php include("includes/footer.php"); ?>
 		</div>
-
 
 	</body>
 </html>

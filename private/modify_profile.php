@@ -1,3 +1,18 @@
+<?php
+
+include("../php/verif_login.php");
+
+if(!isset($_SESSION)) {
+	//------------------------------------------------------------------------------
+	// Redirection vers private/index
+	echo "<p>Vous devez être connecté pour accéder à cette page!<p>";
+	echo "<p>Redirection vers l'<a href='index.php'>index</a>...</p>";
+	header('refresh:5;url=index.php');
+	exit;
+}
+
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -21,7 +36,7 @@
 
 		// Récolter informations utilisateur
 		include("../php/get_user_infos.php");
-		$id   = (int) $_REQUEST['id'];
+		$id   = (int) $_SESSION['id'];
 		$user = get_user_infos($id);
 		if(!$user) { // Si l'utilisateur n'existe pas, affiche l'erreur et le footer
 			echo "<p>L'id $id ne correspond à aucun utilisateur.</p>";

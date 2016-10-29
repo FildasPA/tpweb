@@ -1,3 +1,9 @@
+<?php
+
+include("../php/verif_login.php");
+
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -10,12 +16,12 @@
 	<body>
 
 		<div id="main-container">
-			<p>Bonjour $nom $prenom!</p>
+			<p>Bonjour <?php echo $_SESSION['firstname'] . " " . $_SESSION['name']; ?>!</p>
 			<h4>Liste des utilisateurs inscrits</h4>
 			<?php	include("../php/display_users_list.php");	?>
-			<?php include("../includes/footer.php"); ?>
+			<?php include("../includes/footer.php");
+			?>
 		</div>
-
 
 	</body>
 </html>
