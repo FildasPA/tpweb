@@ -4,7 +4,7 @@
 	<title>Index - Liste des utilisateurs</title>
 	<meta charset="utf-8" />
 	<meta name="author" content="Delvaux Julien, id:1500182, Boge Julien, id:1502198"/>
-	<meta name="description" content="Index du site / Liste des utilisateurs enregistrés" />
+	<meta name="description" content="Index du site / Liste des utilisateurs enregistrés / v. publique" />
   <link rel="stylesheet" href="css/main.css">
 </head>
 	<body>
@@ -24,6 +24,7 @@
 				<input type="checkbox" name="remember-me" style="width:auto !important;display:inline-block;">
 					<label style="width:auto !important;display:inline-block;">Rester connecté</label>
 				</div>
+				<input type="hidden" name="form-name" value="login">
 				<div id="submit-element">
 					<input id="submit-button" class="button" type="submit" name="valider" value="Connexion">
 				</div>
