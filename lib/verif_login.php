@@ -35,10 +35,10 @@ function test_input($data)
 
 session_start(); // ouverture/reprise de session simple
 
-echo "REQUEST:<br>"; var_dump($_REQUEST); echo "<br>"; echo "<br>";
-echo "SERVER:<br>";  var_dump($_SERVER);  echo "<br>"; echo "<br>";
-echo "SESSION:<br>"; var_dump($_SESSION); echo "<br>"; echo "<br>";
-echo "COOKIE1:<br>"; var_dump($_COOKIE);  echo "<br>"; echo "<br>";
+// echo "REQUEST:<br>"; var_dump($_REQUEST); echo "<br>"; echo "<br>";
+// echo "SERVER:<br>";  var_dump($_SERVER);  echo "<br>"; echo "<br>";
+// echo "SESSION:<br>"; var_dump($_SESSION); echo "<br>"; echo "<br>";
+// echo "COOKIE1:<br>"; var_dump($_COOKIE);  echo "<br>"; echo "<br>";
 // setcookie("remember-user","",time()-3600);
 // echo "COOKIE2:<br>"; var_dump($_COOKIE);  echo "<br>"; echo "<br>";
 
@@ -51,53 +51,11 @@ if(!$conn) {
 	exit;
 }
 
-if(isset($_SESSION['id'])) {
-	// Aucune erreur à signaler
-}
-
-//------------------------------------------------------------------------------
-// Pas de session en cours, mais cookie existe
-//------------------------------------------------------------------------------
-else if(!isset($_SESSION['id']) && isset($_COOKIE['remember-user'])) {
-
-	$id = $_COOKIE['remember-user'];
-
-	echo "id cookie: " . $_COOKIE['remember-user'] . "<br>";
-
-	//------------------------------------------------------------------------------
-	// Récupération des informations de l'utilisateur
-	try {
-		$sql = "SELECT login,nom,prenom,avatar
-		        FROM personnes
-		        WHERE id=:id
-		        LIMIT 1";
-		$user = $conn->prepare($sql);
-		$user->bindParam(':id',$id,PDO::PARAM_INT);
-		$user->execute();
-		if($user === false || $user->rowCount() == 0) {
-			echo "<p>Erreur: cookie incorrect?</p>";
-			echo "<p>Redirection vers l'<a href='../index.php'>index</a>...</p>";
-			header('refresh:5;url=../index.php');
-			exit;
-		}
-		$user = $user->fetch(PDO::FETCH_ASSOC);
-	}	catch(Exception $e) {
-		echo "<br/>" . $e->getMessage() . "<br/>";
-		exit;
-	}
-
-	//------------------------------------------------------------------------------
-	// Connexion réussie
-	$_SESSION['id']        = (int) $id;
-	$_SESSION['login']     = $user['login'];
-	$_SESSION['name']      = $user['nom'];
-	$_SESSION['firstname'] = $user['prenom'];
-}
 
 //------------------------------------------------------------------------------
 // Pas de session, mais demande de connexion (formulaire)
 //------------------------------------------------------------------------------
-else if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login") {
+if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login") {
 
 	//------------------------------------------------------------------------------
 	// Récupération des informations
@@ -144,6 +102,49 @@ else if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login
 	// echo "<p>Connexion...<p>";
 	// echo "<p>Redirection vers l'<a href='index.php'>index</a>...</p>";
 	// header('refresh:5;url=index.php');
+}
+
+//------------------------------------------------------------------------------
+// Pas de session en cours, mais cookie existe
+//------------------------------------------------------------------------------
+else if(!isset($_SESSION['id']) && isset($_COOKIE['remember-user'])) {
+
+	$id = $_COOKIE['remember-user'];
+
+	echo "id cookie: " . $_COOKIE['remember-user'] . "<br>";
+
+	//------------------------------------------------------------------------------
+	// Récupération des informations de l'utilisateur
+	try {
+		$sql = "SELECT login,nom,prenom,avatar
+		        FROM personnes
+		        WHERE id=:id
+		        LIMIT 1";
+		$user = $conn->prepare($sql);
+		$user->bindParam(':id',$id,PDO::PARAM_INT);
+		$user->execute();
+		if($user === false || $user->rowCount() == 0) {
+			echo "<p>Erreur: cookie incorrect?</p>";
+			echo "<p>Redirection vers l'<a href='../index.php'>index</a>...</p>";
+			header('refresh:5;url=../index.php');
+			exit;
+		}
+		$user = $user->fetch(PDO::FETCH_ASSOC);
+	}	catch(Exception $e) {
+		echo "<br/>" . $e->getMessage() . "<br/>";
+		exit;
+	}
+
+	//------------------------------------------------------------------------------
+	// Connexion réussie
+	$_SESSION['id']        = (int) $id;
+	$_SESSION['login']     = $user['login'];
+	$_SESSION['name']      = $user['nom'];
+	$_SESSION['firstname'] = $user['prenom'];
+}
+
+else if(isset($_SESSION['id'])) {
+	// Aucune erreur à signaler
 }
 
 //------------------------------------------------------------------------------
