@@ -28,14 +28,19 @@ if(!isset($_SESSION)) {
 			<?php
 
 			// var_dump($_REQUEST); echo "<br>";
+			$error_msg = array('login'        => '',
+			                   'old-password' => '',
+			                   'new-password' => '',
+			                   'firstname'    => '',
+			                   'name'         => '',
+			                   'avatar'       => '');
 
 			// Traitement des modifications du profil
 			if($_SERVER['REQUEST_METHOD'] == "POST") {
 				include("../php/modify_profile.php");
 			}
-
 			// Récolter informations utilisateur
-			include("../php/get_user_infos.php");
+			include_once("../php/get_user_infos.php");
 			$id   = (int) $_SESSION['id'];
 			$user = get_user_infos($id);
 			if(!$user) { // Si l'utilisateur n'existe pas, affiche l'erreur et le footer
@@ -43,6 +48,7 @@ if(!isset($_SESSION)) {
 				include("../includes/footer.php");
 				exit;
 			}
+
 
 			?>
 
@@ -54,29 +60,30 @@ if(!isset($_SESSION)) {
 							<div class="info-label">Login:</div>
 							<div id="user-login">
 								<input id="login" name="login" type="text/html" value="<?php echo $user['login']; ?>">
-								<div id="error-login" class="error-message"></div>
+								<div id="error-login" class="error-message"><?php echo $error_msg['login']; ?></div>
 							</div>
 						</div>
 						<div class="info-element">
 							<div class="info-label">Modifier le mot de passe:</div>
 							<div id="user-login">
-								<input id="password" name="old-password" type="password" placeholder="Ancien mot de passe" onblur="checkPassword()" style="	margin-bottom: 10px;"><br>
+								<input id="password" name="old-password" type="password" placeholder="Ancien mot de passe" onblur="checkPassword()">
+								<div id="error-password" class="error-message"><?php echo $error_msg['old-password']; ?></div>
 								<input id="password" name="new-password" type="password" placeholder="Nouveau mot de passe" onblur="checkPassword()">
-								<div id="error-password" class="error-message"></div>
+								<div id="error-password" class="error-message"><?php echo $error_msg['new-password']; ?></div>
 							</div>
 						</div>
 						<div class="info-element">
 							<div class="info-label">Prénom:</div>
 							<div id="user-firstname">
 								<input id="firstname" name="firstname" type="text/html" value="<?php echo $user['prenom']; ?>">
-								<div id="error-firstname" class="error-message"></div>
+								<div id="error-firstname" class="error-message"><?php echo $error_msg['firstname']; ?></div>
 							</div>
 						</div>
 						<div class="info-element">
 							<div class="info-label">Nom:</div>
 							<div id="user-name">
 								<input id="name" name="name" type="text/html" value="<?php echo $user['nom']; ?>">
-								<div id="error-name" class="error-message"></div>
+								<div id="error-name" class="error-message"><?php echo $error_msg['name']; ?></div>
 							</div>
 						</div>
 						<div class="info-element" style="overflow:auto;">
@@ -84,9 +91,8 @@ if(!isset($_SESSION)) {
 							<img id="user-avatar-image" src="../pictures/<?php echo $user['avatar']; ?>" style="float:left;">
 							<input id="max-file-size" name="max-file-size" type="hidden" value="1000000" />
 							<input id="avatar" name="avatar" type="file" style="float:left;margin-left: 15px;margin-top: 25px;">
-							<div id="error-avatar" class="error-message"></div>
+							<div id="error-avatar" class="error-message"><?php echo $error_msg['avatar']; ?></div>
 						</div>
-						<input name="id" type="hidden" value="<?php echo $id; ?>">
 						<div id="submit-element">
 							<input id="submit-button" class="button" name="valider" type="submit" value="Modifier profil">
 						</div>

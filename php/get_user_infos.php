@@ -20,7 +20,7 @@ function get_user_infos($id) {
 	}
 
 	try {
-		$sql = "SELECT nom,prenom,avatar,login
+		$sql = "SELECT nom,prenom,avatar,login,password
 		        FROM personnes
 		        WHERE id = :id
 		        LIMIT 1";
