@@ -37,13 +37,11 @@ function display_users()
 			return;
 		}
 		echo "<table><tr>";
-		// echo "<th>Nom</th>";
-		// echo "<th>Prénom</th>";
 		echo "<th>Pseudo</th>";
 		echo "</tr>";
 		while($user = $users->fetch(PDO::FETCH_ASSOC)) {
 			echo "<tr class='user' onclick=\"window.document.location='";
-			// Lien vers la page view profile ou modify profile
+			// Lien vers la page view_profile ou private/modify_profile
 			if(isset($_SESSION)) {
 				if($_SESSION['login'] == $user['login']) {
 					echo "modify_profile.php" . "';\" title=\"Modifier le profil\">";
@@ -54,8 +52,6 @@ function display_users()
 				echo "view_profile.php?id=" . $user['id'] . "';\" title=\"Voir le profil\">";
 			}
 			echo "<td>" . $user['login']    . "</td>";
-			// echo "<td>" . $user['nom']    . "</td>";
-			// echo "<td>" . $user['prenom'] . "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";

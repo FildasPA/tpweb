@@ -1,4 +1,9 @@
-<?php include("php/verif_login.php"); ?>
+<?php
+	session_start();
+	if(isset($_SESSION['id'])) {
+		include("php/verif_login.php");
+	}
+?>
 
 <!doctype html>
 <html lang="fr">
@@ -19,6 +24,7 @@
 		include("php/get_user_infos.php");
 		$id   = (int) $_REQUEST['id'];
 		$user = get_user_infos($id);
+		$user['password'] = ''; // sécurité?
 
 		// Si aucune info (utilisateur inexistant?) affiche l'erreur et le footer
 		if($user === false) {
@@ -49,7 +55,7 @@
 
 		<?php
 		// Affichage du footer correct (retour à l'index publique ou privé)
-		if(isset($_SESSION) && $_SESSION['id']) {
+		if(isset($_SESSION['id'])) {
 			echo "<div id=\"footer\">";
 			echo "<a href=\"private/index.php\">Index</a>";
 			echo "</div>";

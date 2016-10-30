@@ -3,7 +3,7 @@
 //==============================================================================
 //
 // ■ Verif login
-// -- Objet : Connexion par formulaire, cookie ou reprise simple de session
+// -- Objet : Connexion par formulaire, cookie ou simple reprise de session
 // -- Par : Julien Delvaux & Julien Boge
 // -- Dernière modification : 29.10.16
 //

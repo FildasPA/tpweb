@@ -94,7 +94,7 @@ form input#submit-button {
 }
 
 form .error-message {
-	display: none;
+	display: block;
 	margin: 5px 0;
 	color: red;
 }
@@ -162,7 +162,7 @@ form .error-message {
 	margin-bottom: 7px;
 }
 
-#user-profile .info-element div:not(.info-label) {
+#user-profile .info-element > div:not(.info-label) {
 	margin-left: 10px;
 }
 
