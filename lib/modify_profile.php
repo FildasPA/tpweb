@@ -92,7 +92,7 @@ function copy_avatar($url,$dest_file)
 	if(copy($url,$dest_file)) {
 		return true;
 	}	else {
-		echo "<p style='color:red;'>L'image n'a pas pu être ajoutée...</p>";
+		$error_msg['avatar'] = "L'image n'a pas pu être ajoutée...";
 		return false;
 	}
 }
@@ -103,7 +103,6 @@ function copy_avatar($url,$dest_file)
 function alter_user($conn,$new_user,$id)
 {
 	try {
-		echo "<p><b>Applications des modifications...</b></p>";
 		$sql = "UPDATE personnes
 		        SET nom=:name,prenom=:firstname,avatar=:avatar,login=:login,password=:password
 		        WHERE id=:id";
@@ -149,10 +148,8 @@ function modify_profile(&$new_user,$old_password)
 	//------------------------------------------------------------------------------
 	// Vérifie si le nouveau login est déjà pris
 	if($old_user['login'] != $new_user['login']) {
-		echo "<p>Changement du login...</p>";
 		$is_login_used = is_login_used($conn,$new_user['login']);
 		if($is_login_used != false && $is_login_used != $id) {
-			echo "<p>Erreur: login déjà pris</p>";
 			$error_msg['login'] = "Ce pseudo est déjà pris!";
 			$error = true;
 		}
@@ -163,14 +160,12 @@ function modify_profile(&$new_user,$old_password)
 	//------------------------------------------------------------------------------
 	// Ancien mot de passe incorrect
 	if(!empty($old_password) && $old_user['password'] != $old_password) {
-		echo "<p>Erreur: l'ancien mot de passe ne correspond pas!</p>";
 		$error_msg['old-password'] = "L'ancien mot de passe ne correspond pas!";
 		$error = true;
 	}
 	//------------------------------------------------------------------------------
 	// Aucun changement de mot de passe
 	else if(empty($old_password) && empty($new_password)) {
-		echo "<p>Pas de changement de mot de passe</p>";
 		$new_user['password'] = $old_user['password'];
 	}
 
@@ -190,14 +185,12 @@ function modify_profile(&$new_user,$old_password)
 	// * 1. Aucune nouvelle image n'a été envoyée ET le login ne change pas
 	if(empty($_FILES['avatar']['tmp_name']) && $old_user['login'] == $new_user['login']) {
 		$new_user['avatar'] = $old_user['avatar'];
-		echo "<p>Pas de changement de login => pas de changement d'avatar</p>";
 	}
 	//------------------------------------------------------------------------------
 	// * 2. Aucune nouvelle image n'a été envoyée ET le login change
 	else if(empty($_FILES['avatar']['tmp_name']) && $old_user['login'] != $new_user['login']) {
 		$image_type         = substr($old_user['avatar'],strrpos($old_user['avatar'],"."));
 		$new_user['avatar'] = 'avatar_' . $new_user['login'] . $image_type;
-		echo "<p>Renommage de l'avatar... (" . $old_user['avatar'] . "," . $new_user['avatar'] . ") </p>";
 		rename($dest_dir . $old_user['avatar'],$dest_dir . $new_user['avatar']);
 	}
 	//------------------------------------------------------------------------------
@@ -208,7 +201,6 @@ function modify_profile(&$new_user,$old_password)
 		$avatar_name = $_FILES['avatar']['name'];
 		$image_type  = substr($avatar_name,strrpos($avatar_name,"."));
 		$new_user['avatar'] = 'avatar_' . $new_user['login'] . $image_type;
-		echo "<p>Changement de l'avatar: copie de l'image... (" . $avatar_url . "," . $new_user['avatar'] . "	)</p>";
 		copy_avatar($avatar_url,"../pictures/" . $new_user['avatar']);
 	}
 
