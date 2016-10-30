@@ -1,6 +1,6 @@
 <?php
 
-include("../php/verif_login.php");
+include("../lib/verif_login.php");
 
 if(!isset($_SESSION)) {
 	//------------------------------------------------------------------------------
@@ -37,10 +37,10 @@ if(!isset($_SESSION)) {
 
 			// Traitement des modifications du profil
 			if($_SERVER['REQUEST_METHOD'] == "POST") {
-				include("../php/modify_profile.php");
+				include("../lib/modify_profile.php");
 			}
 			// Récolter informations utilisateur
-			include_once("../php/get_user_infos.php");
+			include_once("../lib/get_user_infos.php");
 			$id   = (int) $_SESSION['id'];
 			$user = get_user_infos($id);
 			if(!$user) { // Si l'utilisateur n'existe pas, affiche l'erreur et le footer

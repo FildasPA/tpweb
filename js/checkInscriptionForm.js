@@ -59,7 +59,7 @@ function checkUserLoginAlreadyUsed(element)
 			}
 		}
 	};
-	xhttp.open("GET","php/is_login_used.php?login="+content,true); // requête GET asynchrone
+	xhttp.open("GET","lib/is_login_used.php?login="+content,true); // requête GET asynchrone
 	xhttp.send();
 	return true;
 }

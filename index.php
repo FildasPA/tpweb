@@ -30,7 +30,7 @@
 				</div>
 			</form>
 
-			<?php include("php/display_users_list.php"); ?>
+			<?php include("lib/display_users_list.php"); ?>
 			<?php include("includes/footer.php"); ?>
 		</div>
 

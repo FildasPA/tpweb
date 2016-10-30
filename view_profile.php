@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION['id'])) {
-		include("php/verif_login.php");
+		include("lib/verif_login.php");
 	}
 ?>
 
@@ -21,7 +21,7 @@
 		<?php
 
 		// Obtenir les informations utilisateur
-		include("php/get_user_infos.php");
+		include("lib/get_user_infos.php");
 		$id   = (int) $_REQUEST['id'];
 		$user = get_user_infos($id);
 		$user['password'] = ''; // sécurité?

@@ -9,7 +9,7 @@
 </head>
 <body onload="checkFormOnLoad()">
 
-	<?php include("php/register.php"); ?>
+	<?php include("lib/register.php"); ?>
 
 	<form id="form-inscription" name="inscription" method="POST" action="inscription.php" enctype="multipart/form-data">
 		<h3>Inscription</h3>

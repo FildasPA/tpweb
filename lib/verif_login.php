@@ -42,6 +42,15 @@ echo "COOKIE1:<br>"; var_dump($_COOKIE);  echo "<br>"; echo "<br>";
 // setcookie("remember-user","",time()-3600);
 // echo "COOKIE2:<br>"; var_dump($_COOKIE);  echo "<br>"; echo "<br>";
 
+//------------------------------------------------------------------------------
+// Connexion à la bdd
+include_once("connect_db.php");
+$conn = connect_db();
+if(!$conn) {
+	echo "<p style='color:red;'>Impossible de se connecter à la bdd</p>";
+	exit;
+}
+
 if(isset($_SESSION['id'])) {
 	// Aucune erreur à signaler
 }
@@ -54,14 +63,6 @@ else if(!isset($_SESSION['id']) && isset($_COOKIE['remember-user'])) {
 	$id = $_COOKIE['remember-user'];
 
 	echo "id cookie: " . $_COOKIE['remember-user'] . "<br>";
-	//------------------------------------------------------------------------------
-	// Connexion à la bdd
-	include_once("../php/connect_db.php");
-	$conn = connect_db();
-	if(!$conn) {
-		echo "<p style='color:red;'>Impossible de se connecter à la bdd</p>";
-		exit;
-	}
 
 	//------------------------------------------------------------------------------
 	// Récupération des informations de l'utilisateur
@@ -102,15 +103,6 @@ else if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login
 	// Récupération des informations
 	$login    = test_input($_REQUEST['login']);
 	$password = test_input($_REQUEST['password']);
-
-	//------------------------------------------------------------------------------
-	// Connexion à la bdd
-	include_once("../php/connect_db.php");
-	$conn = connect_db();
-	if(!$conn) {
-		echo "<p style='color:red;'>Impossible de se connecter à la bdd</p>";
-		exit;
-	}
 
 	//------------------------------------------------------------------------------
 	// Récupération des informations de l'utilisateur s'il existe
@@ -159,6 +151,7 @@ else if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login
 // formulaire => erreur, redirection vers l'index publique
 //------------------------------------------------------------------------------
 else {
+	unset($conn);
 	echo "<p>Erreur: vous n'êtes pas connecté!<p>";
 	echo "<p>Redirection vers l'<a href='../index.php'>index</a>...</p>";
 	header('refresh:5;url=../index.php');

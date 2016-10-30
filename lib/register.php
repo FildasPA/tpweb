@@ -10,7 +10,7 @@
 //==============================================================================
 
 
-// include("php/display_globals.php"); // affiche le contenu des variables globales
+// include("lib/display_globals.php"); // affiche le contenu des variables globales
 
 //------------------------------------------------------------------------------
 // Test input (pris sur w3schools)

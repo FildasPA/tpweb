@@ -1,6 +1,6 @@
 <?php
 
-include("../php/verif_login.php");
+include("../lib/verif_login.php");
 
 ?>
 
@@ -18,7 +18,7 @@ include("../php/verif_login.php");
 		<div id="main-container">
 			<p>Bonjour <?php echo $_SESSION['firstname'] . " " . $_SESSION['name']; ?>!</p>
 			<h4>Liste des utilisateurs inscrits</h4>
-			<?php	include("../php/display_users_list.php");	?>
+			<?php	include("../lib/display_users_list.php");	?>
 			<div id="footer">
 				<a href="index.php">Index</a>
 			</div>
