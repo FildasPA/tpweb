@@ -5,7 +5,7 @@
 // ■ Register
 // -- Objet : Traitement du formulaire d'inscription
 // -- Par : Julien Delvaux & Julien Boge
-// -- Dernière modification : 23.10.16
+// -- Dernière modification : 01.11.16
 //
 //==============================================================================
 
@@ -46,7 +46,7 @@ function check_user_info($user,$avatar_url)
 //------------------------------------------------------------------------------
 function copy_avatar($url,$dest_file)
 {
-	$dest_dir  = dirname($_SERVER['SCRIPT_FILENAME']) . "/pictures/";
+	$dest_dir  = dirname(dirname(__FILE__)) . "/pictures/";
 	$dest_file = $dest_dir . $dest_file;
 	if(copy($url,$dest_file)) {
 		return true;
@@ -128,10 +128,10 @@ function register($user,$avatar_url)
 
 //------------------------------------------------------------------------------
 // * MAIN
-// Récupère les informations transmises via le formulaire
 //------------------------------------------------------------------------------
 $user = array('name'=>'','firstname'=>'','login'=>'','password'=>'');
 
+// Récupère les informations transmises via le formulaire
 $is_info_set = (isset($_REQUEST['name']) &&
                 isset($_REQUEST['firstname']) &&
                 isset($_REQUEST['login']) &&
