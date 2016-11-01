@@ -1,4 +1,5 @@
 <?php
+	// Ici la session est nécessaire pour afficher le lien correct vers /private/index.php (et non /index.php)
 	session_start();
 	if(isset($_SESSION['id'])) {
 		include("lib/verif_login.php");
