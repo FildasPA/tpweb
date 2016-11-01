@@ -1,4 +1,4 @@
-# tpweb
+# tpweb (TP3)
 ## /index.php
 Cette page présente un formulaire de connexion proposant de "retenir" l'utilisateur pendant 1 mois.
 La page appelle __/lib/display_users_list.php__, permettant d'afficher la liste des utilisateurs de la base triés par leur nom et prénom. Chaque ligne de la table propose un lien vers __view_profile.php__.
