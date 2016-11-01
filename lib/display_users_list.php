@@ -5,7 +5,7 @@
 // ■ Display users list
 // -- Objet : Affiche la liste des utilisateurs enregistrés dans la bdd
 // -- Par : Julien Delvaux & Julien Boge
-// -- Dernière modification : 23.10.16
+// -- Dernière modification : 01.11.16
 //
 //==============================================================================
 
@@ -21,8 +21,9 @@ function display_users()
 
 	try {
 		// Obtenir la liste des utilisateurs (100 max, à partir du début)
-		$sql = "SELECT id,login
+		$sql = "SELECT id,nom,prenom,login
 	          FROM personnes
+	          ORDER BY nom, prenom
 	          LIMIT 100";
 		$users = $conn->prepare($sql);
 		$users->execute();
@@ -37,7 +38,8 @@ function display_users()
 			return;
 		}
 		echo "<table><tr>";
-		echo "<th>Pseudo</th>";
+		echo "<th>Nom</th>";
+		echo "<th>Prénom</th>";
 		echo "</tr>";
 		while($user = $users->fetch(PDO::FETCH_ASSOC)) {
 			echo "<tr class='user' onclick=\"window.document.location='";
@@ -51,7 +53,8 @@ function display_users()
 			} else {
 				echo "view_profile.php?id=" . $user['id'] . "';\" title=\"Voir le profil\">";
 			}
-			echo "<td>" . $user['login']    . "</td>";
+			echo "<td>" . $user['nom']    . "</td>";
+			echo "<td>" . $user['prenom']    . "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";
