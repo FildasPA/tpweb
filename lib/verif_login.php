@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login") {
 	//------------------------------------------------------------------------------
 	// Récupération des informations de l'utilisateur s'il existe
 	try {
-		$sql = "SELECT id,nom,prenom,avatar
+		$sql = "SELECT id,nom,prenom,password
 		        FROM personnes
 		        WHERE login=:login AND password=:password
 		        LIMIT 1";
@@ -93,15 +93,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login") {
 	$_SESSION['firstname'] = $user['prenom'];
 
 	//------------------------------------------------------------------------------
-	// Création du cookie (si demandé)
+	// Création du cookie (si demandé) => conserve l'id et le mot de passe
 	if($_REQUEST['remember-me'] == "on") {
-		setcookie("remember-user",$user['id'],time() + (3600 * 24 * 7 * 31));
+		setcookie("id",      $user['id'],      time() + (3600 * 24 * 7 * 31));
+		setcookie("password",$user['password'],time() + (3600 * 24 * 7 * 31));
 	}
-	//------------------------------------------------------------------------------
-	// Redirection vers private/index
-	// echo "<p>Connexion...<p>";
-	// echo "<p>Redirection vers l'<a href='index.php'>index</a>...</p>";
-	// header('refresh:5;url=index.php');
 }
 
 //------------------------------------------------------------------------------
@@ -109,22 +105,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && $_REQUEST["form-name"] == "login") {
 //------------------------------------------------------------------------------
 else if(!isset($_SESSION['id']) && isset($_COOKIE['remember-user'])) {
 
-	$id = $_COOKIE['remember-user'];
-
-	echo "id cookie: " . $_COOKIE['remember-user'] . "<br>";
-
 	//------------------------------------------------------------------------------
 	// Récupération des informations de l'utilisateur
 	try {
-		$sql = "SELECT login,nom,prenom,avatar
+		$sql = "SELECT login,nom,prenom
 		        FROM personnes
-		        WHERE id=:id
+		        WHERE id=:id AND password=:password
 		        LIMIT 1";
 		$user = $conn->prepare($sql);
-		$user->bindParam(':id',$id,PDO::PARAM_INT);
+		$user->bindParam(':id',      $_COOKIE['id'],      PDO::PARAM_INT);
+		$user->bindParam(':password',$_COOKIE['password'],PDO::PARAM_STR,32);
 		$user->execute();
 		if($user === false || $user->rowCount() == 0) {
-			echo "<p>Erreur: cookie incorrect?</p>";
+			echo "<p>Erreur: informations du cookie incorrectes</p>";
 			echo "<p>Redirection vers l'<a href='../index.php'>index</a>...</p>";
 			header('refresh:5;url=../index.php');
 			exit;
@@ -137,12 +130,14 @@ else if(!isset($_SESSION['id']) && isset($_COOKIE['remember-user'])) {
 
 	//------------------------------------------------------------------------------
 	// Connexion réussie
-	$_SESSION['id']        = (int) $id;
+	$_SESSION['id']        = (int) $_COOKIE['id'];
 	$_SESSION['login']     = $user['login'];
 	$_SESSION['name']      = $user['nom'];
 	$_SESSION['firstname'] = $user['prenom'];
 }
 
+//------------------------------------------------------------------------------
+// Reprise simple de la session
 else if(isset($_SESSION['id'])) {
 	// Aucune erreur à signaler
 }
